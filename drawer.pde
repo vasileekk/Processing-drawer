@@ -79,8 +79,12 @@ void keyReleased(){
         resetColors();
         break;
       case 'e':
-        selectInput("Select a file to process:", "fileSelected");
-        break;        
+        selectInput("Select a image:", "fileSelected");
+        break;
+      case 'w':
+        selectInput("Select a image:", "fileSelected");
+        changeImgScale();
+        break;  
       case ENTER:
         if((inputType == 1 || inputType == 2) && selected != arr.size()){
           if(inputType == 2)arr.get(arr.size()-1).addP(mouseX, mouseY);
@@ -145,6 +149,16 @@ void fileSelected(File selection) {
   } else {
     img = loadImage(selection.getAbsolutePath());
   }
+}
+
+void changeImgScale(){
+  if(img.width>width){
+   img.resize(width, 0);
+  }
+  if(img.height > height){
+   img.resize(0, height);
+  }
+  
 }
 
 void save(){
