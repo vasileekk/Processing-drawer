@@ -38,6 +38,7 @@ class Shp{
       vertex(x, y);
       endShape();
         break;
+        
       case 2:
       beginShape();
       for (int i = 0; i < pts.size(); i++){
@@ -46,20 +47,24 @@ class Shp{
       curveVertex(x, y);
       endShape();
         break;
+        
       case 3:
       rect(pts.get(0).x, pts.get(0).y, x - pts.get(0).x, y - pts.get(0).y);
         break;
+        
       case 4:
       int x1 = (pts.get(0).x + x)/2;
       int y1 = (pts.get(0).y + y)/2;
       ellipse(x1, y1, x - pts.get(0).x, y - pts.get(0).y);
         break;
+        
     }
   }
   
   void draw(){
     stroke(str);
     fill(fl);
+    
     switch(type){
       case 1:
       beginShape();
@@ -68,6 +73,7 @@ class Shp{
       }
       endShape();
         break;
+        
       case 2:
       beginShape();
       for (int i = 0; i < pts.size(); i++){
@@ -75,14 +81,17 @@ class Shp{
       }
       endShape();
         break;
+        
       case 3:
       rect(pts.get(0).x, pts.get(0).y, pts.get(1).x - pts.get(0).x, pts.get(1).y - pts.get(0).y);
         break;
+        
       case 4:
       int x1 = (pts.get(0).x + pts.get(1).x)/2;
       int y1 = (pts.get(0).y + pts.get(1).y)/2;
       ellipse(x1, y1, pts.get(1).x - pts.get(0).x, pts.get(1).y - pts.get(0).y);
         break;
+        
     }
   }
 }

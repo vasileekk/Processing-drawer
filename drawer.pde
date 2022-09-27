@@ -1,14 +1,20 @@
-int wH = 900, wW = 1600;
-
 PImage img;
-void setup() {
-  size(1600, 900);
+void settings() {
   img = loadImage("1.png");
+  if(img!=null){
+    size(img.width, img.height);
+  }
+  else{
+    size(1600, 900);    
+  }
+}
+
+void setup(){
   strokeWeight(5);
 }
 
 // vertex-curvevertex-rect-ellipse
-int inputType = 1;
+int inputType = 5;
 int selected = 0;
 
 color defFill = color(200);
@@ -18,7 +24,6 @@ color selStroke = defStroke;
 
 ArrayList<Shp> arr = new ArrayList<Shp>();
 
-
 void draw() {
   clear();
   background(240);
@@ -26,7 +31,6 @@ void draw() {
   {
     image(img, 0, 0);
   }
-  
   stroke(selStroke);
   fill(selFill);
   square(width-110,10, 100);
@@ -71,6 +75,12 @@ void keyReleased(){
       case 'z':
         deleteLast();
         break;
+      case 'r':
+        resetColors();
+        break;
+      case 'e':
+        selectInput("Select a file to process:", "fileSelected");
+        break;        
       case ENTER:
         if((inputType == 1 || inputType == 2) && selected != arr.size()){
           if(inputType == 2)arr.get(arr.size()-1).addP(mouseX, mouseY);
@@ -106,14 +116,14 @@ void mousePressed(){
     }
   }
   else{
-  if(selected == arr.size()){
-   Shp s = new Shp(inputType, mouseX, mouseY, selFill, selStroke);
-   arr.add(s);
-  }
-  else{
-   arr.get(arr.size()-1).addP(mouseX, mouseY);
-   if(inputType!= 1 && inputType!= 2)selected++;   
-  }
+    if(selected == arr.size()){
+     Shp s = new Shp(inputType, mouseX, mouseY, selFill, selStroke);
+     arr.add(s);
+    }
+    else{
+     arr.get(arr.size()-1).addP(mouseX, mouseY);
+     if(inputType!= 1 && inputType!= 2)selected++;   
+    }
   }
 }
 
@@ -121,6 +131,19 @@ void deleteLast(){
   if(arr.size() > 0 && selected == arr.size()){
    arr.remove(arr.size() - 1);
    selected--;
+  }
+}
+
+void resetColors(){
+ selFill = defFill; 
+ selStroke = defStroke;
+}
+
+void fileSelected(File selection) {
+  if (selection == null) {
+    println("Something went wrong");
+  } else {
+    img = loadImage(selection.getAbsolutePath());
   }
 }
 
