@@ -1,7 +1,7 @@
 Supported:
 vertex, curveVertex, rect, ellipse
 
-By defalut load 1.png from current folder
+By defalut loads 1.png from current folder
 
 KeyBinds:
 "S" to save drawing commands to outup.txt
