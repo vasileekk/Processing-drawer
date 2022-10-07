@@ -131,6 +131,13 @@ void mousePressed(){
   }
 }
 
+void mouseWheel(MouseEvent event) {
+  float e = event.getCount();
+  if(e>0 && inputType<5)inputType++;
+  if(e<0 && inputType>1)inputType--;
+
+}
+
 void deleteLast(){
   if(arr.size() > 0 && selected == arr.size()){
    arr.remove(arr.size() - 1);
@@ -145,7 +152,7 @@ void resetColors(){
 
 void fileSelected(File selection) {
   if (selection == null) {
-    println("Something went wrong");
+    println("Failed to load image");
   } else {
     img = loadImage(selection.getAbsolutePath());
   }

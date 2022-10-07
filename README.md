@@ -9,6 +9,7 @@ KeyBinds:
 "W" to load image and scale it to the window size(if image is bigger than window)
 "Z" to delete last shape
 "R" to reset colors to default
+"ENTER" to finish drawing vertex
 
 1-5 select drawing mode:
 vertex, curveVertex, rect, ellipse, Color Selection
