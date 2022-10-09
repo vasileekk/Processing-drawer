@@ -11,6 +11,8 @@ KeyBinds:
 "R" to reset colors to default
 "ENTER" to finish drawing vertex
 
+Mouse wheel changes global strokeWeight
+
 1-5 select drawing mode:
 vertex, curveVertex, rect, ellipse, Color Selection
 

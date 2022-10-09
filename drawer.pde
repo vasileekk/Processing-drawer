@@ -9,13 +9,10 @@ void settings() {
   }
 }
 
-void setup(){
-  strokeWeight(5);
-}
-
 // vertex-curvevertex-rect-ellipse
 int inputType = 5;
 int selected = 0;
+float strWeight = 4;
 
 color defFill = color(200);
 color defStroke = color(50);
@@ -27,6 +24,9 @@ ArrayList<Shp> arr = new ArrayList<Shp>();
 void draw() {
   clear();
   background(240);
+  
+  strokeWeight(strWeight);
+  
   if (img != null )
   {
     image(img, 0, 0);
@@ -61,7 +61,6 @@ void draw() {
   if(selected != arr.size() && arr.size()>0){
     arr.get(arr.size()-1).aim(mouseX, mouseY);
   }
-  
   for (int i = 0; i < arr.size(); i++){
     if(selected!=i)arr.get(i).draw();
   }
@@ -133,9 +132,12 @@ void mousePressed(){
 
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
-  if(e>0 && inputType<5)inputType++;
-  if(e<0 && inputType>1)inputType--;
-
+  if(strWeight > 0.1){
+    strWeight += e/10;
+  }
+  else if(e>0){
+    strWeight += e/10;
+  }
 }
 
 void deleteLast(){
@@ -170,22 +172,23 @@ void changeImgScale(){
 
 void save(){
   ArrayList<String> out = new ArrayList<String>();
+  out.add("strokeWeight(" + strWeight + ");");
   for(int i = 0; i < arr.size(); i++){
-    out.add("fill("+red(arr.get(i).fl)+", "+green(arr.get(i).fl)+", "+blue(arr.get(i).fl)+");");
-    out.add("stroke("+red(arr.get(i).str)+", "+green(arr.get(i).str)+", "+blue(arr.get(i).str)+");");
+    out.add("fill(" + int(red(arr.get(i).fl)) + ", " + int(green(arr.get(i).fl)) + ", " + int(blue(arr.get(i).fl)) + ");");
+    out.add("stroke(" + int(red(arr.get(i).str)) + ", " + int(green(arr.get(i).str))+", " + int(blue(arr.get(i).str)) + ");");
     // vertex-curvevertex-rect-ellipse
     switch(arr.get(i).type){
       case 1:
         out.add("beginShape();");
         for(int j = 0; j < arr.get(i).pts.size(); j++){
-          out.add("vertex("+arr.get(i).pts.get(j).x+", "+arr.get(i).pts.get(j).y+");");
+          out.add("vertex(" + arr.get(i).pts.get(j).x + ", " + arr.get(i).pts.get(j).y + ");");
         }
         out.add("endShape();");
         break;
       case 2:
         out.add("beginShape();");
         for(int j = 0; j < arr.get(i).pts.size(); j++){
-          out.add("curveVertex("+arr.get(i).pts.get(j).x+", "+arr.get(i).pts.get(j).y+");");
+          out.add("curveVertex(" + arr.get(i).pts.get(j).x + ", " + arr.get(i).pts.get(j).y + ");");
         }
         out.add("endShape();");
         break;
